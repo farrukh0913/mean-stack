@@ -1,20 +1,39 @@
+<form [formGroup]="registrationForm" >
+
 <div class="container">
     <div class="card">
-        <div class="card_title">
-            <h1>Create Account</h1>
-            <span>Already have an account? <a href="login">Sign In</a></span>
+      <div class="card_title">
+        <h1>Create Account</h1>
+        <span>Already have an account? <a href="login">Sign In</a></span>
+      </div>
+      <div class="form" >
+        <input type="text" formControlName="userName" placeholder="UserName" />
+        <div *ngIf="registrationForm.get('userName')?.hasError('required') && registrationForm.get('userName')?.touched">
+          Username is required.
         </div>
-        <div class="form">
-            <form>
-                <input type="text" name="username" id="username" placeholder="UserName" />
-                <input type="email" name="email" placeholder="Email" id="email" />
-                <input type="password" name="password" placeholder="Password" id="password" />
-                <button>Sign Up</button>
-            </form>
+      
+        <input type="email" formControlName="email" placeholder="Email" />
+        <div *ngIf="registrationForm.get('email')?.hasError('required') && registrationForm.get('email')?.touched">
+          Email is required.
         </div>
-        <div class="card_terms">
-            <input type="checkbox" name="" id="terms"> <span>I have read and agree to the <a href="">Terms of
-                    Service</a></span>
+        <div *ngIf="registrationForm.get('email')?.hasError('email') && registrationForm.get('email')?.touched">
+          Please enter a valid email address.
         </div>
+      
+        <input type="password" formControlName="password" placeholder="Password" />
+        <div *ngIf="registrationForm.get('password')?.hasError('required') && registrationForm.get('password')?.touched">
+          Password is required.
+        </div>
+        <div *ngIf="registrationForm.get('password')?.hasError('minlength') && registrationForm.get('password')?.touched">
+          Password must be at least 6 characters long.
+        </div>
+      
+        <button (click)="onSubmit()" [disabled]="registrationForm.invalid">Sign Up</button>
+      </div>
+      
+     
     </div>
-</div>
+  </div>
+</form>
+
+  
