@@ -18,7 +18,10 @@
         </div>
 
         <button (click)="onSubmit()" [disabled]="loginForm.invalid" [class.disabled]="loginForm.invalid">Login</button>
-      </div>
+    <p *ngIf="errorMessage">
+        {{errorMessage}}
+    </p>  
+    </div>
     </div>
   </div>
 </form>

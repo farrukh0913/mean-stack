@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class SignUpComponent {
   registrationForm: FormGroup;
+  usedEmail:boolean = false;
 
   constructor(private router: Router, private formBuilder: FormBuilder, private sharedService: sharedService) {
     this.registrationForm = this.formBuilder.group({
@@ -20,10 +21,21 @@ export class SignUpComponent {
   }
   onSubmit() {
     if (this.registrationForm.valid) {
-      this.sharedService.SignUp(this.registrationForm.value).subscribe((res: any) => {
-        console.log('res: ', res);
-        this.router.navigate(['/login'])
-      })
+      this.sharedService.SignUp(this.registrationForm.value).subscribe(
+        (res: any) => {
+          console.log('Success response: ', res);
+          this.router.navigate(['/login']);
+        },
+        (error: any) => {
+          console.error('Error response: ', error);
+          if(error.error.error === "User with this email already exists"){
+            this.usedEmail = true
+            console.log('this.usedEmail: ', this.usedEmail);
+          }
+          // Handle the error here (e.g., display an error message to the user)
+        }
+      );
+      
       console.log('this.registrationForm.value: ', this.registrationForm.value);
 
     }

@@ -32,6 +32,11 @@
         </div>
 
         <button (click)="onSubmit()" [disabled]="registrationForm.invalid">Sign Up</button>
+        <div *ngIf="usedEmail">
+            <p>
+                Users with this email already exist, Please continue with different Email
+            </p>
+        </div>
       </div>
 
 

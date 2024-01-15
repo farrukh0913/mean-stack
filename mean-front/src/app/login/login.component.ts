@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   loginForm: FormGroup;
+  errorMessage:string=''
 
   constructor(private router: Router, private formBuilder: FormBuilder, private sharedService: sharedService) {
     this.loginForm = this.formBuilder.group({
@@ -21,11 +22,20 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.loginForm.valid) {
-      this.sharedService.login(this.loginForm.value).subscribe((res) => {
-        console.log('res: ', res);
-        Router
-        this.router.navigate(['/home/homePage'])
-      })
+      this.sharedService.login(this.loginForm.value).subscribe(
+        (res: any) => {
+          console.log('Success response: ', res);
+          this.router.navigate(['/home/homePage']);
+        },
+        (error: any) => {
+          console.error('Error response: ', error);
+          this.errorMessage = error.error.message
+    
+        }
+      );
+      this.loginForm.reset()
+
+      
     }
   }
 }

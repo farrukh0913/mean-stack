@@ -53,9 +53,10 @@
 .form {
     display: flex;
     flex-direction: column;
-    div{
+    div , p{
         color: red;
     }
+    
 }
 
 .form button {
