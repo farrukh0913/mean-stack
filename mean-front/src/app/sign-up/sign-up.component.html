@@ -1,17 +1,18 @@
-<form [formGroup]="registrationForm" >
+<form [formGroup]="registrationForm">
 
-<div class="container">
+  <div class="container">
     <div class="card">
       <div class="card_title">
         <h1>Create Account</h1>
         <span>Already have an account? <a href="login">Sign In</a></span>
       </div>
-      <div class="form" >
+      <div class="form">
         <input type="text" formControlName="userName" placeholder="UserName" />
-        <div *ngIf="registrationForm.get('userName')?.hasError('required') && registrationForm.get('userName')?.touched">
+        <div
+          *ngIf="registrationForm.get('userName')?.hasError('required') && registrationForm.get('userName')?.touched">
           Username is required.
         </div>
-      
+
         <input type="email" formControlName="email" placeholder="Email" />
         <div *ngIf="registrationForm.get('email')?.hasError('required') && registrationForm.get('email')?.touched">
           Email is required.
@@ -19,21 +20,21 @@
         <div *ngIf="registrationForm.get('email')?.hasError('email') && registrationForm.get('email')?.touched">
           Please enter a valid email address.
         </div>
-      
+
         <input type="password" formControlName="password" placeholder="Password" />
-        <div *ngIf="registrationForm.get('password')?.hasError('required') && registrationForm.get('password')?.touched">
+        <div
+          *ngIf="registrationForm.get('password')?.hasError('required') && registrationForm.get('password')?.touched">
           Password is required.
         </div>
-        <div *ngIf="registrationForm.get('password')?.hasError('minlength') && registrationForm.get('password')?.touched">
+        <div
+          *ngIf="registrationForm.get('password')?.hasError('minlength') && registrationForm.get('password')?.touched">
           Password must be at least 6 characters long.
         </div>
-      
+
         <button (click)="onSubmit()" [disabled]="registrationForm.invalid">Sign Up</button>
       </div>
-      
-     
+
+
     </div>
   </div>
 </form>
-
-  

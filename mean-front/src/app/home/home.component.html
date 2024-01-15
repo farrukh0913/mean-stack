@@ -1,0 +1,24 @@
+<header>
+    <div id="header">
+        <div class="brand">
+            <a href="#name" class="name">Jane Doe</a>
+        </div>
+        <ul class="menu">
+            <li><a routerLink="/home/homePage">Home</a></li>
+            <li><a routerLink="/home/aboutPage">About</a></li>
+            <li><a routerLink="/home/blogsPage">Blogs</a></li>
+            <li><a routerLink="/home/communtyPage">Community</a></li>
+            <li><a routerLink="/home/pricingPage">Pricing</a></li>
+            <li><a routerLink="/home/newsPage">News</a></li>
+
+        </ul>
+    </div>
+    <div class="profile-container">
+        <img mat-button [matMenuTriggerFor]="menu" src="../../assets/profile.jpg">
+        <mat-menu class="customize" #menu="matMenu">
+            <button mat-menu-item routerLink="/home/profilePage">Profile</button>
+            <button routerLink="/login" mat-menu-item>Logout <i class="fa-solid fa-right-from-bracket"></i></button>
+        </mat-menu>
+    </div>
+</header>
+<router-outlet></router-outlet>

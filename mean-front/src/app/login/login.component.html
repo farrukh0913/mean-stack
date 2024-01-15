@@ -1,25 +1,24 @@
 <form [formGroup]="loginForm">
 
-    <div class="container">
-      <div class="card">
-        <div class="card_title">
-          <h1>Login to Account</h1>
-          <span>Don't have an account? <a routerLink="/signup">Sign Up</a></span>
+  <div class="container">
+    <div class="card">
+      <div class="card_title">
+        <h1>Login to Account</h1>
+        <span>Don't have an account? <a routerLink="/signup">Sign Up</a></span>
+      </div>
+      <div class="form">
+        <input type="text" formControlName="userName" placeholder="UserName" />
+        <div *ngIf="loginForm.get('userName')?.hasError('required') && loginForm.get('userName')?.touched">
+          Username is required.
         </div>
-        <div class="form">
-          <input type="text" formControlName="userName" placeholder="UserName" />
-          <div *ngIf="loginForm.get('userName')?.hasError('required') && loginForm.get('userName')?.touched">
-            Username is required.
-          </div>
-  
-          <input type="password" formControlName="password" placeholder="Password" />
-          <div *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
-            Password is required.
-          </div>
-  
-          <button (click)="onSubmit()" [disabled]="loginForm.invalid" [class.disabled]="loginForm.invalid">Login</button>
+
+        <input type="password" formControlName="password" placeholder="Password" />
+        <div *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
+          Password is required.
         </div>
+
+        <button (click)="onSubmit()" [disabled]="loginForm.invalid" [class.disabled]="loginForm.invalid">Login</button>
       </div>
     </div>
-  </form>
-  
+  </div>
+</form>
