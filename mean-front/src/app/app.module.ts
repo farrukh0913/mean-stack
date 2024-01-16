@@ -18,6 +18,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { PaymentMethodComponent } from './payment-method/payment-method.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +32,8 @@ import { HttpClientModule } from '@angular/common/http';
     BlogsPageComponent,
     PricingPageComponent,
     CommunityPageComponent,
-    ProfilePageComponent
+    ProfilePageComponent,
+    PaymentMethodComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     MatButtonModule, MatMenuModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

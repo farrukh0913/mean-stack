@@ -3,6 +3,8 @@ const app = express();
 let mongoose = require('mongoose')
 let bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken');
+const bodyParser = require('body-parser');
+const stripe = require('stripe')('sk_test_51OZ9R5H0hyV9WvCf4nnweT4PCCP41daHWhdPWphFQTkFaPs74Ni5yevh2DG0FrtG0t4Puf7sdbGlYj8DvvUs27ij00N1tzPFBE');
 const TOKEN_KEY = "1221212121"
 
 // Define a route
@@ -13,6 +15,8 @@ const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -28,6 +32,36 @@ const dataSchema = new mongoose.Schema({
 const userModel = mongoose.model('User', dataSchema);
 
 // Listen on port 3000
+app.post('/create-subscription', async (req, res) => {
+  const { paymentMethodId, priceId, customerEmail } = req.body;
+
+  try {
+    // Create a customer
+    const customer = await stripe.customers.create({
+      email: customerEmail,
+      payment_method: paymentMethodId,
+      invoice_settings: {
+        default_payment_method: paymentMethodId,
+      },
+    });
+
+    // Create a subscription
+    const subscription = await stripe.subscriptions.create({
+      customer: customer.id,
+      items: [
+        {
+          price: priceId,
+        },
+      ],
+      expand: ['latest_invoice.payment_intent'],
+    });
+
+    res.status(200).json({ subscriptionId: subscription.id });
+  } catch (error) {
+    console.error('Error creating subscription:', error.message);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
 
 app.post('/newUser', async (req, res) => {
   const { userName, email, password } = req.body;

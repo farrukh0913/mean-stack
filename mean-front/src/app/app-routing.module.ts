@@ -10,6 +10,7 @@ import { CommunityPageComponent } from './community-page/community-page.componen
 import { BlogsPageComponent } from './blogs-page/blogs-page.component';
 import { PricingPageComponent } from './pricing-page/pricing-page.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { PaymentMethodComponent } from './payment-method/payment-method.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignUpComponent },
@@ -22,8 +23,9 @@ const routes: Routes = [
       { path: 'newsPage', component: NewsPageComponent },
       { path: 'communtyPage', component: CommunityPageComponent },
       { path: 'blogsPage', component: BlogsPageComponent },
-      { path: 'pricingPage', component: PricingPageComponent },
+      { path: 'paymentMethod', component: PricingPageComponent },
       { path: 'profilePage', component: ProfilePageComponent },
+      { path: 'pricingPage', component: PaymentMethodComponent },
 
     ],
   },

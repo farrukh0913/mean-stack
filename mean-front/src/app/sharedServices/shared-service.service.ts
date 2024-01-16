@@ -14,5 +14,9 @@ export class sharedService {
   login(UserInfo:any){
    return this.http.post('http://localhost:3000/login' , UserInfo)
   }
+  paymentGateway(body: any) {
+    return this.http.post('http://localhost:3000/create-subscription', body);
+  }
+  
 
 }
